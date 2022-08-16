@@ -10,6 +10,7 @@
 # A Sudoku board (partially filled) could be valid but is not necessarily solvable.
 # Only the filled cells need to be validated according to the mentioned rules.
 
+from collections import defaultdict
 def isValidSudoku(board):
     for i in board:
         set_i = list(set(i))
@@ -20,7 +21,25 @@ def isValidSudoku(board):
         if len(set_i) - 1 != len(temp):
             return False
     
-    
+    for col in range(len(board[0])):
+        set_col = []
+        temp_col = []
+        for row in range(len(board)):
+            set_col.append(board[row][col])
+            if board[row][col] != '.':
+                temp_col.append(board[row][col])
+        if len(list(set(set_col))) - 1 != len(temp_col):
+            return False
+
+    d = defaultdict(set)
+    for row in range(len(board)):
+        for col in range(len(board[0])):
+            position = [row // 3, col // 3]
+            if board[row][col] != '.' and board[row][col] in d[str(position)]:
+                return False
+            else: 
+                d[str(position)].add(board[row][col])
+
     return True
 
 board = [["5","3",".",".","7",".",".",".","."]
