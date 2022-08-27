@@ -25,7 +25,7 @@
 # Example 3:
 
 # Input: piles = [30,11,23,4,20], h = 6
-# Output: 23 test
+# Output: 23 test2
 import math
 def minEatingSpeed(piles, h):
     minK = math.ceil(sum(piles) / h)
