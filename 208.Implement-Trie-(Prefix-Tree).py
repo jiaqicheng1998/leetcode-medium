@@ -42,9 +42,9 @@ class Trie:
     def startsWith(self, prefix):
         cur = self.root
 
-        for c in word:
+        for c in prefix:
             if c not in cur.children:
                 return False
-            cur = cur.children
+            cur = cur.children[c]
         
         return True
