@@ -1,21 +1,24 @@
-# Given an integer array nums of unique elements, return 
-# all possible subsets (the power set).
+# Given an integer array nums that may contain duplicates, 
+# return all possible subsets (the power set).
 
 # The solution set must not contain duplicate subsets. 
 # Return the solution in any order.
 
+ 
+
 # Example 1:
 
-# Input: nums = [1,2,3]
-# Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+# Input: nums = [1,2,2]
+# Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
 
 # Example 2:
 
 # Input: nums = [0]
 # Output: [[],[0]]
 
-def subsets(nums):
+def subsetsWithDup(nums):
     res = []
+    nums.sort()
 
     subset = []
     def dfs(i):
@@ -25,7 +28,9 @@ def subsets(nums):
         subset.append(nums[i])
         dfs(i+1)
         subset.pop()
+        while i + 1 < len(nums) and nums[i] == nums[i+1]:
+            i += 1
         dfs(i+1)
-    
+
     dfs(0)
     return res
